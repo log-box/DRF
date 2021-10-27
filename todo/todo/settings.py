@@ -38,6 +38,7 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'authors',
+    'todousers',
 
 ]
 
@@ -52,7 +53,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'todo.urls'
-
+AUTH_USER_MODEL = 'todousers.TodoUsers'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
