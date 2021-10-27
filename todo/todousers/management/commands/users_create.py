@@ -1,8 +1,11 @@
 from django.core.management import BaseCommand
+
 from todousers.models import TodoUsers
+
 
 class Command(BaseCommand):
     help = 'Создание пяти рандомных пользователей, а также супер пользователя - admin\nПароли равны username'
+
     def handle(self, *args, **options):
         TodoUsers.objects.all().delete()
 
@@ -12,4 +15,4 @@ class Command(BaseCommand):
                                                      password=f'user{i}')
             new_user.save()
 
-        ShopUser.objects.create_superuser(username='admin', password='admin', age=37)
+        TodoUsers.objects.create_superuser(username='admin', password='admin')
