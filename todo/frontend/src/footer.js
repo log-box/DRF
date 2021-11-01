@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-// import '../../resource/template.css'
 
 
 class TodoFooter extends Component{

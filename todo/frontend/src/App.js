@@ -3,6 +3,8 @@ import './App.css';
 // import TodoUsers from "./TodoUsers";
 import TodoUsersList from "./TodoUsers";
 import TodoFooter from "./footer"
+import axios from 'axios'
+import TodoHeader from "./header";
 
 class App extends React.Component {
     constructor(props) {
@@ -13,31 +15,22 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        const todousers = [
-            {
-                'username': 'User1',
-                'first_name': 'Фёдор',
-                'last_name': 'Достоевский',
-                'email': 'email@mai.ru'
-            },
-            {
-                'username': 'User2',
-                'first_name': 'Александр',
-                'last_name': 'Грин',
-                'email': 'yandex@ya.ru'
-            },
-        ]
-        this.setState(
-            {
-                'todousers': todousers
-            }
-        )
+        axios.get('http://127.0.0.1:8000/api/users')
+            .then(response => {
+                const todousers = response.data
+                this.setState(
+                    {
+                        'todousers': todousers
+                    }
+                )
+            }).catch(error => console.log(error))
     }
 
     render() {
         return (
 
             <div>
+                <TodoHeader></TodoHeader>
                 <TodoUsersList todousers={this.state.todousers}/>
                 <TodoFooter></TodoFooter>
             </div>
