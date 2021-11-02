@@ -6,7 +6,7 @@ class TodoHeader extends Component{
     return (
         <Navbar bg="light" expand="lg" >
   <Container fluid>
-    <Navbar.Brand href="#">Navbar scroll</Navbar.Brand>
+    {/*<Navbar.Brand href="#">Navbar scroll</Navbar.Brand>*/}
     <Navbar.Toggle aria-controls="navbarScroll" />
     <Navbar.Collapse id="navbarScroll">
       <Nav
@@ -14,8 +14,8 @@ class TodoHeader extends Component{
         style={{ maxHeight: '100px' }}
         navbarScroll
       >
-        <Nav.Link href="#action1">Home</Nav.Link>
-        <Nav.Link href="#action2">Link</Nav.Link>
+        <Nav.Link href="http://127.0.0.1:8000/api/users">Users</Nav.Link>
+        <Nav.Link href="http://127.0.0.1:3000">Home</Nav.Link>
         {/*<NavDropdown title="Link" id="navbarScrollingDropdown">*/}
         {/*  <NavDropdown.Item href="#action3">Action</NavDropdown.Item>*/}
         {/*  <NavDropdown.Item href="#action4">Another action</NavDropdown.Item>*/}
@@ -24,9 +24,9 @@ class TodoHeader extends Component{
         {/*    Something else here*/}
         {/*  </NavDropdown.Item>*/}
         {/*</NavDropdown>*/}
-        <Nav.Link href="#" disabled>
-          Link
-        </Nav.Link>
+        {/*<Nav.Link href="#" disabled>*/}
+        {/*  Link*/}
+        {/*</Nav.Link>*/}
       </Nav>
       <Form className="d-flex">
         <FormControl
