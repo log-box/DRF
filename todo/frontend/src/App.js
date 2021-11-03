@@ -2,9 +2,9 @@ import React from 'react';
 import './App.css';
 // import TodoUsers from "./TodoUsers";
 import TodoUsersList from "./TodoUsers";
-import TodoFooter from "./footer"
+import TodoFooter from "./components/footer"
 import axios from 'axios'
-import TodoHeader from "./header";
+import TodoHeader from "./components/header";
 
 class App extends React.Component {
     constructor(props) {
