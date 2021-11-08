@@ -1,8 +1,9 @@
-from rest_framework.relations import PrimaryKeyRelatedField, HyperlinkedRelatedField, StringRelatedField
-from rest_framework.serializers import ModelSerializer, HyperlinkedModelSerializer
+from rest_framework import serializers
+from rest_framework.relations import PrimaryKeyRelatedField
+from rest_framework.serializers import ModelSerializer
+
 from todocore.models import Project, Todo
 from todousers.models import TodoUsers
-from todousers.serializers import UsersModelSerializer
 
 
 class ProjectModelSerializer(ModelSerializer):
@@ -10,13 +11,12 @@ class ProjectModelSerializer(ModelSerializer):
 
     class Meta:
         model = Project
-        # fields = '__all__'
         fields = ['id', 'project_name', 'repository', 'project_user']
 
 
 class TodoModelSerializer(ModelSerializer):
     user = PrimaryKeyRelatedField(queryset=TodoUsers.objects.select_related())
-    # project = PrimaryKeyRelatedField(queryset=Project.objects.all())
+    is_active = serializers.BooleanField(read_only=True)
 
     class Meta:
         model = Todo

@@ -2,8 +2,6 @@ from django.db import models
 from todousers.models import TodoUsers
 
 
-# Create your models here.
-
 class Project(models.Model):
     project_name = models.CharField(max_length=100)
     project_user = models.ManyToManyField(TodoUsers, blank=True)
@@ -31,3 +29,8 @@ class Todo(models.Model):
 
     def __str__(self):
         return self.project
+
+    # def save(self, *args, **kwargs):
+    #     self.is_active = True
+    #     super().save(*args, **kwargs)
+
