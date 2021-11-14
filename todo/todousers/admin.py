@@ -5,4 +5,4 @@ from todousers.models import TodoUsers
 from django.contrib.auth.models import Group
 
 admin.site.register(TodoUsers)
-admin.site.unregister(Group)
+# admin.site.unregister(Group)
