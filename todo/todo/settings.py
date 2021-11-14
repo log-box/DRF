@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'todousers',
     'todocore',
+    'rest_framework.authtoken',
 
     'corsheaders',
 
@@ -57,10 +58,15 @@ MIDDLEWARE = [
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 100,
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    ]
 }
 CORS_ALLOWED_ORIGINS = [
-   "http://localhost:3000",
-   "http://127.0.0.1:3000",
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
 ]
 
 ROOT_URLCONF = 'todo.urls'
