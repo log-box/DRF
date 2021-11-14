@@ -35,7 +35,9 @@ const TodoUsersList = ({todousers}) => {
            <th>
                Email
            </th>
-           {todousers.map((todouser) => <TodoUser todouser={todouser} />)}
+           {
+               todousers.map((todouser) => <TodoUser todouser={todouser} />)
+           }
        </table>
    )
 }
