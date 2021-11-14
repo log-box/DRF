@@ -46,7 +46,7 @@ class TodoModelViewSet(ModelViewSet):
         serializer = TodoModelSerializer(todo,
                                          data={"user": todo.user.pk, "project": todo.project.pk, "is_active": "false"})
         serializer.is_valid(raise_exception=True)
-        serializer.save()
+        # serializer.save()
         todo.is_active = False
         todo.save()
         return Response(serializer.data)
