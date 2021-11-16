@@ -43,6 +43,8 @@ INSTALLED_APPS = [
 
     'corsheaders',
 
+    # 'todousers.apps.TodousersConfig',
+
 ]
 
 MIDDLEWARE = [

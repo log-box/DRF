@@ -9,15 +9,16 @@ from django.db import models
 #     sername = models.CharField(max_length=100, unique=True)
 
 
-class TodoUsers(AbstractBaseUser):
+class TodoUsers(AbstractUser):
 
-    USERNAME_FIELD = 'username'
-    username = models.CharField(max_length=100, unique=True)
-    first_name = models.CharField(max_length=100, )
-    last_name = models.CharField(max_length=100, )
-    is_staff = models.BooleanField(default=True)
+    # USERNAME_FIELD = 'username'
+    #
+    # username = models.CharField(max_length=100, unique=True)
+    # first_name = models.CharField(max_length=100, )
+    # last_name = models.CharField(max_length=100, )
+    # # is_staff = models.BooleanField(default=True)
     email = models.EmailField(
         verbose_name='почта',
         unique=True,
     )
-    objects = UserManager()
+    # objects = UserManager()
