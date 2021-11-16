@@ -5,11 +5,11 @@ from django.db import models
 
 # Create your models here.
 
-class Group():
-    sername = models.CharField(max_length=100, unique=True)
+# class Group():
+#     sername = models.CharField(max_length=100, unique=True)
 
 
-class TodoUsers(AbstractBaseUser, PermissionsMixin):
+class TodoUsers(AbstractBaseUser):
 
     USERNAME_FIELD = 'username'
     username = models.CharField(max_length=100, unique=True)
