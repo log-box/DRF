@@ -14,6 +14,12 @@ class ProjectModelSerializer(HyperlinkedModelSerializer):
         fields = ['id', 'project_name', 'repository', 'project_user']
 
 
+class ProjectModelSerializerBase(ModelSerializer):
+    class Meta:
+        model = Project
+        fields = '__all__'
+
+
 class TodoModelSerializer(HyperlinkedModelSerializer):
     user = PrimaryKeyRelatedField(queryset=TodoUsers.objects.select_related())
     is_active = serializers.BooleanField(read_only=True)

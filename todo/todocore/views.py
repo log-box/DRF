@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
 from todocore.models import Project, Todo
-from todocore.serializers import ProjectModelSerializer, TodoModelSerializer
+from todocore.serializers import ProjectModelSerializer, TodoModelSerializer, ProjectModelSerializerBase
 
 """
 модель Project: доступны все варианты запросов; для постраничного вывода установить размер страницы 10 записей; добавить
@@ -27,6 +27,12 @@ class ProjectModelViewSet(ModelViewSet):
     queryset = Project.objects.all()
     serializer_class = ProjectModelSerializer
     pagination_class = ProjectsPagesLimits
+
+    # def get_serializer_class(self):
+    #     if self.request.method in ['GET']:
+    #         return ProjectModelSerializer
+    #     else:
+    #         return ProjectModelSerializerBase
 
     def get_queryset(self):
         project_name = self.request.query_params.get('project_name', '')
