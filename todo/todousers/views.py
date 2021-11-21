@@ -5,7 +5,8 @@ from rest_framework.response import Response
 
 from todousers.models import TodoUsers
 from todousers.serializers import UsersModelSerializer
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
+
 """
 модель User: есть возможность просмотра списка и каждого пользователя в отдельности, 
 можно вносить изменения, нельзя удалять и создавать;
@@ -13,7 +14,7 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 
 class UsersModelViewSet(viewsets.ViewSet):
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticated]
     renderer_classes = [BrowsableAPIRenderer, JSONRenderer]
 
     def list(self, request):
