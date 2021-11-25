@@ -21,7 +21,7 @@ from todocore.views import ProjectModelViewSet, TodoModelViewSet
 from todousers.views import UsersModelViewSet
 
 router = DefaultRouter()
-router.register('users', UsersModelViewSet, basename='todousers')
+# router.register('users', UsersModelViewSet, basename='todousers')
 router.register('projects', ProjectModelViewSet)
 router.register('todos', TodoModelViewSet)
 
@@ -30,4 +30,6 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include(router.urls)),
     path('api-token-auth/', views.obtain_auth_token),
+    path('api/<str:version>/users/', UsersModelViewSet.as_view()),
+    path('api/users/', UsersModelViewSet.as_view()),
 ]
