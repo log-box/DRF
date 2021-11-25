@@ -1,12 +1,9 @@
-from rest_framework import viewsets
-from rest_framework.generics import get_object_or_404, ListAPIView, GenericAPIView, RetrieveUpdateDestroyAPIView, \
-    CreateAPIView
+from rest_framework.generics import ListAPIView, CreateAPIView
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.renderers import JSONRenderer, BrowsableAPIRenderer
-from rest_framework.response import Response
 
 from todousers.models import TodoUsers
 from todousers.serializers import UsersModelSerializer, ExtendsUsersModelSerializer
-from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 
 """
 модель User: есть возможность просмотра списка и каждого пользователя в отдельности, 
@@ -14,11 +11,16 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticate
 """
 
 
-class UsersModelViewSet(CreateAPIView, ListAPIView ):
+class UsersModelViewSet(ListAPIView, CreateAPIView):
     queryset = TodoUsers.objects.all()
     serializer_class = UsersModelSerializer
     permission_classes = [IsAuthenticated]
     renderer_classes = [BrowsableAPIRenderer, JSONRenderer]
+
+    def get_serializer_class(self):
+        if self.request.version == 'extend':
+            return ExtendsUsersModelSerializer
+        return UsersModelSerializer
     # permission_classes = [IsAuthenticated]
     # renderer_classes = [BrowsableAPIRenderer, JSONRenderer]
     #

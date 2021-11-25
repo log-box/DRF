@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
 
     'corsheaders',
+    'drf_yasg',
+    # 'rest_framework_swagger',
 
     # 'todousers.apps.TodousersConfig',
 
@@ -70,7 +72,13 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
         # 'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
-    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.URLPathVersioning',
+    # 'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.URLPathVersioning',
+    # 'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.URLPathVersioning',      #  use http://127.0.0.1:8000/api/extend/users/
+    # 'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning',    #  use http://127.0.0.1:8000/api/users/extend
+    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.QueryParameterVersioning', #  use http://127.0.0.1:8000/api/users/?version=extend
+    # 'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.AcceptHeaderVersioning'   #
+
+
 }
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
@@ -94,7 +102,11 @@ TEMPLATES = [
         },
     },
 ]
-
+# SETTINGS_PATH = os.path.normpath(os.path.dirname(__file__))
+# # Find templates in the same folder as settings.py.
+# TEMPLATE_DIRS = (
+#     os.path.join(SETTINGS_PATH, 'templates'),
+# )
 WSGI_APPLICATION = 'todo.wsgi.application'
 
 # Database
