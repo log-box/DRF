@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
     'corsheaders',
     'drf_yasg',
+    'graphene_django'
     # 'rest_framework_swagger',
 
     # 'todousers.apps.TodousersConfig',
@@ -75,9 +76,9 @@ REST_FRAMEWORK = {
     # 'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.URLPathVersioning',
     # 'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.URLPathVersioning',      #  use http://127.0.0.1:8000/api/extend/users/
     # 'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning',    #  use http://127.0.0.1:8000/api/users/extend
-    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.QueryParameterVersioning', #  use http://127.0.0.1:8000/api/users/?version=extend
+    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.QueryParameterVersioning',
+    # use http://127.0.0.1:8000/api/users/?version=extend
     # 'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.AcceptHeaderVersioning'   #
-
 
 }
 CORS_ALLOWED_ORIGINS = [
@@ -159,3 +160,6 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+GRAPHENE = {
+    "SCHEMA": "todo.schema.schema"
+}

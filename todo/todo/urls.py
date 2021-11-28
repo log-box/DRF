@@ -18,6 +18,7 @@ from django.urls import path, include
 from django.views.generic import TemplateView
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
+from graphene_django.views import GraphQLView
 from rest_framework import permissions
 from rest_framework.authtoken import views
 from rest_framework.routers import DefaultRouter
@@ -52,6 +53,7 @@ urlpatterns = [
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('api/users/default', include('todousers.urls', namespace='')),
     path('api/users/extend', include('todousers.urls', namespace='extend')),
+    path('graphql/', GraphQLView.as_view(graphiql=True)),
 
     # path('swagger-ui/', TemplateView.as_view(
     #     template_name='swagger-ui.html',
