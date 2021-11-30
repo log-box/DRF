@@ -22,13 +22,11 @@ from graphene_django.views import GraphQLView
 from rest_framework import permissions
 from rest_framework.authtoken import views
 from rest_framework.routers import DefaultRouter
-# from rest_framework.schemas import get_schema_view
-
 from todocore.views import ProjectModelViewSet, TodoModelViewSet
 from todousers.views import UsersModelViewSet
 
 router = DefaultRouter()
-# router.register('users', UsersModelViewSet, basename='todousers')
+router.register('users', UsersModelViewSet, basename='todousers')
 router.register('projects', ProjectModelViewSet)
 router.register('todos', TodoModelViewSet)
 schema_view = get_schema_view(
@@ -48,21 +46,8 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include(router.urls)),
     path('api-token-auth/', views.obtain_auth_token),
-    path('api/<str:version>/users/', UsersModelViewSet.as_view()),
-    path('api/users/', UsersModelViewSet.as_view()),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
-    path('api/users/default', include('todousers.urls', namespace='')),
-    path('api/users/extend', include('todousers.urls', namespace='extend')),
     path('graphql/', GraphQLView.as_view(graphiql=True)),
     path('', TemplateView.as_view(template_name='index.html')),
 
-    # path('swagger-ui/', TemplateView.as_view(
-    #     template_name='swagger-ui.html',
-    #     extra_context={'schema_url': 'openapi-schema'}
-    # ), name='swagger-ui'),
-    # path('openapi', get_schema_view(
-    #     title="Your Project",
-    #     description="API for all things …",
-    #     version="1.0.0"
-    # ), name='openapi-schema'),
 ]

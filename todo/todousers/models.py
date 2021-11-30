@@ -1,5 +1,5 @@
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
-from django.contrib.auth.models import AbstractUser, PermissionsMixin, UserManager
+from django.contrib.auth.models import AbstractUser, PermissionsMixin, UserManager, User
 from django.db import models
 
 
@@ -10,7 +10,6 @@ from django.db import models
 
 
 class TodoUsers(AbstractUser):
-
     # USERNAME_FIELD = 'username'
     #
     # username = models.CharField(max_length=100, unique=True)

@@ -30,7 +30,4 @@ class Todo(models.Model):
     def __str__(self):
         return self.project
 
-    # def save(self, *args, **kwargs):
-    #     self.is_active = True
-    #     super().save(*args, **kwargs)
 
