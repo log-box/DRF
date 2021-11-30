@@ -54,6 +54,7 @@ urlpatterns = [
     path('api/users/default', include('todousers.urls', namespace='')),
     path('api/users/extend', include('todousers.urls', namespace='extend')),
     path('graphql/', GraphQLView.as_view(graphiql=True)),
+    path('', TemplateView.as_view(template_name='index.html')),
 
     # path('swagger-ui/', TemplateView.as_view(
     #     template_name='swagger-ui.html',
