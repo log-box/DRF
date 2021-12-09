@@ -70,7 +70,11 @@ class App extends React.Component {
                     }
                 )
             }).catch(error => console.log(error))
+        console.log(this.state.todousers)
         console.log(this.state.todos)
+        console.log(this.state.projects)
+        console.log(this.state.token)
+
     }
 
     set_token(token) {
