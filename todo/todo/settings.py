@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -24,7 +24,7 @@ SECRET_KEY = 'django-insecure-y66$ps#o!@2fjr*itf$llct%abrb0+u&iw&caa_7ozz%f!w^!!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -38,17 +38,52 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'todousers',
+    'todocore',
+    'rest_framework.authtoken',
+
+    'corsheaders',
+    'drf_yasg',
+    'graphene_django'
+    # 'rest_framework_swagger',
+
+    # 'todousers.apps.TodousersConfig',
 
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+REST_FRAMEWORK = {
+    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    # 'PAGE_SIZE': 100,
+    'DEFAULT_PERMISSION_CLASSES': [
+        # 'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+        # 'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+    # 'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.URLPathVersioning',
+    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.URLPathVersioning',      #  use http://127.0.0.1:8000/api/extend/users/
+    # 'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning',    #  use http://127.0.0.1:8000/api/users/extend
+    # 'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.QueryParameterVersioning',
+    # use http://127.0.0.1:8000/api/users/?version=extend
+    # 'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.AcceptHeaderVersioning'   #
+
+}
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
 ]
 
 ROOT_URLCONF = 'todo.urls'
@@ -56,7 +91,8 @@ AUTH_USER_MODEL = 'todousers.TodoUsers'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'frontend/build/'],
+        # 'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -68,16 +104,28 @@ TEMPLATES = [
         },
     },
 ]
-
+# SETTINGS_PATH = os.path.normpath(os.path.dirname(__file__))
+# # Find templates in the same folder as settings.py.
+# TEMPLATE_DIRS = (
+#     os.path.join(SETTINGS_PATH, 'templates'),
+# )
 WSGI_APPLICATION = 'todo.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # }
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'todo',
+        'USER': 'logvin',
+        'PASSWORD': 'logvin',
+        'HOST': 'db',
+        'PORT': '5432',
     }
 }
 
@@ -117,7 +165,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# STATICFILES_DIRS = str(os.path.join(BASE_DIR, 'frontend', 'build','static'))
+STATICFILES_DIRS = (BASE_DIR / 'frontend/build/static',)
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+GRAPHENE = {
+    "SCHEMA": "todo.schema.schema"
+}

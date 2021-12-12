@@ -14,7 +14,8 @@ class Command(BaseCommand):
                                                      first_name=f'user{i}_first_name',
                                                      last_name=f'user{i}_last_name',
                                                      email=f'user{i}@mail.ru',
-                                                     password=f'user{i}')
+                                                     password=f'user{i}',
+                                                     is_staff=False)
             new_user.save()
 
         TodoUsers.objects.create_superuser(username='admin', password='admin')
